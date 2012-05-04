@@ -19,6 +19,7 @@
 .irb-history
 .java/
 .local/
+.m2/
 .mutt_certificates
 .nbprofiler/
 .neocon/
@@ -27,9 +28,11 @@
 .repoconfig/
 .sh_history
 .ssh/
+.subversion/auth/
 .vegas/
 .vim/backup/
 .vim/bundle/
+.vim/view/
 .vim*.tmp
 .viminfo
 .yjp/
