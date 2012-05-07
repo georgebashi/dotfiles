@@ -49,6 +49,7 @@ Bundle 'groenewege/vim-less'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'michaeljsmith/vim-indent-object'
 "}}}
 
 "}}}
