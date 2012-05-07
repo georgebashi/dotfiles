@@ -52,7 +52,6 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'michaeljsmith/vim-indent-object'
 "}}}
 
-"}}}
 
 "{{{ ctrlp
 let g:ctrlp_working_path_mode = 2
@@ -225,15 +224,6 @@ endif
 " all folds open by default
 autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
 
-" statusline helper
-"function! SL(function)
-  "if exists('*'.a:function)
-    "return call(a:function,[])
-  "else
-    "return ''
-  "endif
-"endfunction
-
 augroup FTMisc
   " save when losing focus, update fugitive status when gaining
   autocmd FocusLost   * silent! wall
@@ -253,19 +243,7 @@ augroup FTMisc
   autocmd BufReadCmd *.jar call zip#Browse(expand("<amatch>"))
 augroup END
 
-augroup java
-  autocmd BufNewFile,BufRead */src/main/java/*.java compiler maven
-  autocmd BufNewFile,BufRead */src/main/java/*.java |
-      \ silent execute "!mvn dependency:build-classpath -Dmdep.outputFile=target/classpath.txt -q"|
-      \ call javacomplete#AddClassPath(readfile("target/classpath.txt", 'b')[0])
-
-  autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-augroup END
-
 "}}}
-
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
 
 au BufNewFile,BufRead *.ftl set ft=html.ftl
 
