@@ -205,7 +205,7 @@ let NERDChristmasTree=1
 let NERDTreeMinimalUI=1
 map <Leader>n :NERDTreeToggle<CR>
 let g:gist_private = 1
-let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'compatible'
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#073642 ctermbg=8
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#073642 ctermbg=8
