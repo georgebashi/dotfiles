@@ -54,6 +54,7 @@ if [ -e ~/bin/jing.jar ]; then
   alias jing="java -jar ~/bin/jing.jar"
 fi
 alias qm="mvn -DskipTests -DskipITs -Dmaven.test.skip"
+alias pupcp="cp -r trunk/* branches/production/ && cp -r trunk/* branches/testing/"
 
 eval "$(rbenv init -)"
 
