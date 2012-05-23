@@ -1,0 +1,89 @@
+source "~/.muttrc.local"
+
+# only show some headers
+ignore      *                                       # ignore all headers
+unignore    from: to: cc: date: subject:            # show only these
+unhdr_order *                                       # remove order defaults (required!)
+hdr_order   to: cc: date: from: subject:            # and in this order
+
+set imap_user = "georgeb"
+set smtp_url = "smtps://georgeb@mail.semantico.net:465/"
+set from = "georgeb@semantico.com"
+alternates "george\.bashi@semantico\.com"
+set realname = "George Bashi"
+
+set editor = "vim"
+
+set folder = "imaps://mail.semantico.net:993/"
+set spoolfile = "+INBOX"
+set imap_check_subscribed
+set hostname = "semantico.com"
+set ssl_force_tls=yes
+unset imap_passive
+set imap_idle
+set mail_check = 60
+set timeout = 10
+set postponed = "+Drafts"
+set record = "+Sent"
+set trash = "+Trash"
+set delete = yes
+
+set sidebar_width=25
+set sidebar_visible=yes
+bind index \Ck sidebar-prev
+bind index \Cj sidebar-next
+bind index \Co sidebar-open
+bind pager \Ck sidebar-prev
+bind pager \Cj sidebar-next
+bind pager \Co sidebar-open
+mailboxes =INBOX
+color sidebar_new yellow default
+
+bind index K previous-unread
+bind index J next-unread
+
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set move = no
+set include
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+unset sort_re
+unset hide_thread_subject
+set auto_tag = yes
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+auto_view text/html
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind editor <space> noop 
+macro index \cb |urlview\n
+macro pager \cb |urlview\n
+
+set pager_stop = yes
+set pager_index_lines = 6
+
+set query_command = "~/.ldap.pl '%s'"
+
+set index_format = "%4C | %{%b %d %H:%M} | %-15.15L | %s%> %Z"
+set alias_format = "%4n %t %-20a %r"
+set date_format  = "%m/%d/%y at %I:%M%P"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set reply_regexp = "^((\[[a-zA-Z0-9\.\-\s]+\] ?)?([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^\]]+\] *)?)*"
+set ispell = hunspell
+set beep_new
+set delete
+unset markers
+set wait_key        = no
+set fast_reply
+set forward_format  = "Fwd: %s"
+set forward_quote
+set include
+set reply_to
+
+
+source ~/.solarized.muttrc
