@@ -32,7 +32,9 @@
 .java/
 .local/
 .m2/
+.mutt/
 .mutt_certificates
+.muttrc.local
 .nbprofiler/
 .neocon/
 .netbeans/
