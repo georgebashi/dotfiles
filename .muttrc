@@ -9,10 +9,12 @@ hdr_order   to: cc: date: from: subject:            # and in this order
 set imap_user = "georgeb"
 set smtp_url = "smtps://georgeb@mail.semantico.net:465/"
 set from = "georgeb@semantico.com"
-alternates "george\.bashi@semantico\.com"
+alternates "george\.bashi@semantico\.com|georgeb@gapps\.semantico\.com"
 set realname = "George Bashi"
 
-set editor = "vim"
+set editor = "vim -c 'set syntax=mail ft=mail enc=utf-8'"
+set send_charset="utf-8"
+set assumed_charset="utf-8"
 
 set folder = "imaps://mail.semantico.net:993/"
 set spoolfile = "+INBOX"
@@ -30,6 +32,7 @@ set delete = yes
 
 set sidebar_width=25
 set sidebar_visible=yes
+set sidebar_delim='|'
 bind index \Ck sidebar-prev
 bind index \Cj sidebar-next
 bind index \Co sidebar-open
@@ -69,11 +72,12 @@ set pager_index_lines = 6
 
 set query_command = "~/.ldap.pl '%s'"
 
-set index_format = "%4C | %{%b %d %H:%M} | %-15.15L | %s%> %Z"
+set index_format = "%4C ┊ %{%b %d %H:%M} ┊ %-15.15L ┊ %s%> %Z"
 set alias_format = "%4n %t %-20a %r"
 set date_format  = "%m/%d/%y at %I:%M%P"
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 set reply_regexp = "^((\[[a-zA-Z0-9\.\-\s]+\] ?)?([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^\]]+\] *)?)*"
+set status_format = " %r %f [%?M?%M/?%m messages,%?n? %n new, ?%?o? %o old,?%?d? %d deleted,?%?F? %F flagged,?%?t? %t tagged,?%?p? %p postponed?]%> (%P)   "
 set ispell = hunspell
 set beep_new
 set delete
