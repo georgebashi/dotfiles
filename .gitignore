@@ -3,9 +3,11 @@
 .Bome/
 .DS_Store
 .EasyPmd2/
+.FontForge/
 .NERDTreeBookmarks
 .Protege/
 .Trash/
+.Xauthority
 .adobe/
 .aliases
 .autobench.conf
@@ -15,6 +17,7 @@
 .cassandra.history
 .chef/
 .config/
+.cpan/
 .cups/
 .dropbox/
 .dvdcss/
