@@ -66,8 +66,8 @@ auto_view text/html
 bind editor <Tab> complete-query
 bind editor ^T complete
 bind editor <space> noop 
-macro index \cb |urlview\n
-macro pager \cb |urlview\n
+macro index \cb |/usr/local/bin/urlview\n
+macro pager \cb |/usr/local/bin/urlview\n
 
 set pager_stop = yes
 set pager_index_lines = 6
