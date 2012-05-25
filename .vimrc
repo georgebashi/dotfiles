@@ -217,7 +217,7 @@ set virtualedit=block
 "{{{ misc plugin settings
 " my name for snippets
 let g:snips_author = 'George Bashi'
-autocmd vimenter * NERDTree | winc l
+"autocmd vimenter * NERDTree | winc l
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDChristmasTree=1
 let NERDTreeMinimalUI=1
