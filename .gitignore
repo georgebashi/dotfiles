@@ -22,6 +22,8 @@
 .dropbox/
 .dvdcss/
 .eclipse_keyring
+.exist_history
+.exist_query_history
 .fontconfig/
 .fonts/
 .gem/
@@ -42,14 +44,17 @@
 .neocon/
 .netbeans/
 .parallel/
+.pip/
 .repoconfig/
 .sh_history
+.sipp2.properties.xml
 .smb/
 .ssh/
 .subversion/
 .subversion/auth/
 .vagrant.d/
 .vegas/
+.vim/.netrwhist
 .vim/backup/
 .vim/bundle/
 .vim/doc/
