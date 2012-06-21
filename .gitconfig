@@ -4,7 +4,7 @@
 [color]
   ui = auto
 [core]
-  whitespace = tab-in-indent,tabwidth=2
+  whitespace = tab-in-indent,tabwidth=4
   fsyncobjectfiles = true
   preloadindex = true
   pager = less
