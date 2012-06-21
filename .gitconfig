@@ -8,8 +8,6 @@
   fsyncobjectfiles = true
   preloadindex = true
   pager = less
-[branch]
-  autosetupmerge = always
 [diff]
   mnemonicprefix = true
   renames = copy
