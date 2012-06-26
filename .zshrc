@@ -58,4 +58,8 @@ alias qmd="mvnDebug -DskipTests -DskipITs -Dmaven.test.skip"
 alias pupcp="cp -r trunk/* branches/production/ && cp -r trunk/* branches/testing/"
 
 eval "$(rbenv init -)"
+eval "$(fasd --init auto)"
+alias v='a -e vim'
+alias o='a -e open'
+
 
