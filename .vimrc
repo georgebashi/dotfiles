@@ -168,6 +168,8 @@ set gdefault
 "}}}
 
 "{{{ filetypes
+" gradle = groovy
+au BufNewFile,BufRead *.gradle setf groovy
 " json = js
 au BufNewFile,BufRead *.json set ft=javascript
 " add some ruby types
@@ -264,6 +266,7 @@ augroup END
 "}}}
 
 au BufNewFile,BufRead *.ftl set ft=html.ftl
+au FileType puppet set et sw=4 sts=4
 
 " autocomplete stuff {{{
 if has("autocmd") && exists("+omnifunc")
