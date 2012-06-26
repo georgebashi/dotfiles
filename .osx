@@ -68,6 +68,11 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 # enable airdrop over ethernet
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
+# disable resume
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+defaults write com.apple.loginwindow TALLogoutSavesState -bool false
+defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+
 # Reset Launchpad
 rm ~/Library/Application\ Support/Dock/*.db
 
