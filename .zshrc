@@ -61,5 +61,5 @@ eval "$(rbenv init -)"
 eval "$(fasd --init auto)"
 alias v='a -e vim'
 alias o='a -e open'
-
+p() { HASTE_SERVER=http://pasti.co haste "$*" | pbcopy; }
 
