@@ -230,6 +230,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#073642 ctermbg=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#073642 ctermbg=0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 "}}}
 
 "{{{ clever bits
