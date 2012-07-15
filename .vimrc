@@ -182,8 +182,6 @@ au FileType xml set expandtab sw=2 sts=2
 au FileType java set expandtab sw=4 sts=4
 " use tabs in makefiles
 au FileType make set noexpandtab
-" reload vimrc after saving
-au BufWritePost .vimrc source $MYVIMRC
 " allow modelines
 set modeline
 " search for modelines in first and last 10 lines
