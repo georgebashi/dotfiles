@@ -178,6 +178,8 @@ au BufRead,BufNewFile *.less set ft=css
 au BufRead,BufNewFile *.mg/config set ft=gitconfig
 " use 2 spaces in xml
 au FileType xml set expandtab sw=2 sts=2
+" use 4 spaces in java
+au FileType java set expandtab sw=4 sts=4
 " use tabs in makefiles
 au FileType make set noexpandtab
 " reload vimrc after saving
