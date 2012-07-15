@@ -176,8 +176,8 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set f
 au BufRead,BufNewFile *.less set ft=css
 " .mg/config is a gitconfig file
 au BufRead,BufNewFile *.mg/config set ft=gitconfig
-" use 4 spaces in xml
-au FileType xml set expandtab sw=4 sts=4
+" use 2 spaces in xml
+au FileType xml set expandtab sw=2 sts=2
 " use tabs in makefiles
 au FileType make set noexpandtab
 " reload vimrc after saving
