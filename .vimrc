@@ -100,8 +100,6 @@ set viminfo=/50,'50,:50,h
 " don't update screen for macros
 set lazyredraw
 set viewoptions=folds,options,cursor,unix,slash
-au BufWinLeave *.* silent! mkview
-au BufWinEnter *.* silent! loadview
 
 function! MyFoldText() " {{{
     let line = getline(v:foldstart)
