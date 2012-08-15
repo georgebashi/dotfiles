@@ -8,6 +8,9 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDoubleTapGesture -int 0
 defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 
+defaults write com.apple.dock "expose-group-by-app" -bool false
+defaults write com.apple.dock "dashboard-in-overlay" -bool true
+
 # nuke stupid resume thing
 rm -r $HOME/Library/Saved\ Application\ State
 chmod -R a-w $HOME/Library/Saved\ Application\ State
@@ -27,6 +30,7 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.dock orientation -string left
 
 # show battery time in menu bar
+defaults write com.apple.menuextra.battery ShowPercent -string "NO"
 defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
 # set clock format
@@ -75,6 +79,13 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+
+defaults write com.apple.addressbook ABShowDebugMenu -bool true
+defaults write com.apple.iCal IncludeDebugMenu -bool true
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+
+defaults write com.apple.finder QLEnableTextSelection -bool true
 
 # Reset Launchpad
 rm ~/Library/Application\ Support/Dock/*.db
