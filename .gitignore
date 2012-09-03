@@ -23,6 +23,7 @@
 .dvdcss/
 .eclipse_keyring
 .eclim/
+.editix/
 .exist_history
 .exist_query_history
 .fasd
@@ -33,6 +34,7 @@
 .gradle/
 .gstreamer-0.10/
 .heroku/
+.hgignore_global
 .ievms/
 .irb-history
 .irssi/
@@ -47,16 +49,21 @@
 .nbprofiler/
 .neocon/
 .netbeans/
+.npm/
 .parallel/
+.pentadactyl/
 .pip/
+.pry_history
 .repoconfig/
 .sh_history
 .sipp2.properties.xml
+.slocdata/
 .smb/
 .ssh/
 .subversion/
 .subversion/auth/
 .sqlite_history
+.sysdb20/
 .vagrant.d/
 .vegas/
 .vim/.netrwhist
