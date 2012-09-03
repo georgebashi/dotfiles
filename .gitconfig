@@ -32,3 +32,5 @@
   lol = log --graph --decorate --oneline
   lola = log --graph --decorate --oneline --all
   h = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[push]
+	default = upstream
