@@ -274,4 +274,9 @@ let g:SuperTabLongestHighlight = 1
 let g:SuperTabClosePreviewOnPopupClose = 1
 " }}}
 
+" eclim {{{
+let g:EclimJavaImportExclude = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
+let g:EclimJavaImportPackageSeparationLevel = 0
+"}}}
+
 " vim: set foldmethod=marker:
