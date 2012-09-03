@@ -45,7 +45,7 @@ unsetopt correct_all
 unsetopt share_history
 setopt inc_append_history
 
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_06.jdk/Contents/Home/"
 
 if [ -e ~/bin/saxon9he.jar ]; then
   alias saxon="java -jar ~/bin/saxon9he.jar"
