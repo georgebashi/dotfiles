@@ -25,7 +25,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 if [[ `uname` == "Darwin" ]]; then
-  plugins=(vi-mode ant brew bundler dircycle gem git history-substring-search knife mvn osx rbenv redis-cli ruby screen vagrant vundle)
+  plugins=(vi-mode ant brew bundler dircycle gem git history-substring-search knife mvn osx rbenv redis-cli ruby screen vagrant vundle zsh-syntax-highlighting)
 else
   plugins=(vi-mode bundler gem git git-flow ruby svn history-substring-search)
 fi
