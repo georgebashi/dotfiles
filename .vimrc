@@ -173,6 +173,7 @@ set gdefault
 au BufNewFile,BufRead *.gradle setf groovy
 " json = js
 au BufNewFile,BufRead *.json set ft=javascript
+au BufNewFile,BufRead *.t set ft=sh
 " add some ruby types
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
 au BufRead,BufNewFile *.less set ft=css
