@@ -1,0 +1,14 @@
+
+alias phi_big screenSizeX*0.61803398875
+alias phi_small screenSizeX*0.38196601125
+
+bind q:shift;alt move screenOriginX;screenOriginY ${phi_small};screenSizeY/2
+bind a:shift;alt move screenOriginX;screenOriginY+screenSizeY/2 ${phi_small};screenSizeY/2
+bind e:shift;alt move screenOriginX+${phi_small};screenOriginY ${phi_big};screenSizeY
+
+bind w:shift;alt move screenOriginX;screenOriginY ${phi_small};screenSizeY/3
+bind s:shift;alt move screenOriginX;screenOriginY+screenSizeY/3 ${phi_small};screenSizeY/3
+bind x:shift;alt move screenOriginX;screenOriginY+screenSizeY/3*2 ${phi_small};screenSizeY/3
+
+# Window Hints
+bind esc:cmd hint
