@@ -86,6 +86,6 @@
 .xbmc/
 .yjp/
 .zcompdump*
+.zhistory
 .zsh-update
 .zsh_history
-
