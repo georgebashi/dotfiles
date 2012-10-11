@@ -30,6 +30,7 @@
   lol = log --graph --decorate --oneline
   lola = log --graph --decorate --oneline --all
   h = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 [push]
 	default = upstream
 [url "git@gitlab.semantico.net:"]
