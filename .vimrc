@@ -124,10 +124,10 @@ set foldtext=MyFoldText()
 
 "{{{ whitespace
 " default indent 2 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+"set tabstop=2
+"set shiftwidth=2
+"set softtabstop=2
+"set expandtab
 " highlight tabs & trailing spaces
 set list listchars=tab:\ \ ,trail:·
 " detect file type and load plugins & indent rules
