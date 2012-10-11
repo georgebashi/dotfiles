@@ -51,6 +51,8 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "georgebashi/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
+Bundle "jnwhiteh/vim-golang"
+Bundle "nsf/gocode", {'rtp': 'vim/'}
 "}}}
 
 
