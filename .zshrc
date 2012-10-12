@@ -5,7 +5,7 @@ alias zless=$PAGER
 unsetopt share_history
 setopt inc_append_history
 
-. /usr/local/Cellar/go/1.0.2/misc/zsh/go
+. /usr/local/opt/go/misc/zsh/go
 
 if [ -e ~/bin/saxon9he.jar ]; then
   alias saxon="java -jar ~/bin/saxon9he.jar"
