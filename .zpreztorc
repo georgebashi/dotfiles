@@ -15,6 +15,8 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'ruby' \
   'tmux' \
+  'haskell' \
+  'osx' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt'
