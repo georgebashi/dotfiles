@@ -19,5 +19,6 @@ alias pupcp="cp -r trunk/* branches/production/ && cp -r trunk/* branches/testin
 
 alias ga="git add"
 alias gst="git status"
+alias ffs="sudo"
 
 p() { HASTE_SERVER=http://pasti.co haste "$*" | pbcopy; }
