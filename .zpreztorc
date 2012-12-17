@@ -2,7 +2,6 @@
 zstyle ':prezto:*:*' case-sensitive 'no'
 zstyle ':prezto:*:*' color 'yes'
 
-
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
@@ -15,6 +14,7 @@ zstyle ':prezto:load' pmodule \
   'fasd' \
   'git' \
   'ruby' \
+  'tmux' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt'
