@@ -9,6 +9,7 @@
 .Trash/
 .Xauthority
 .adobe/
+.aerofs.*
 .aliases
 .autobench.conf
 .basex
@@ -23,6 +24,7 @@
 .cpan/
 .csync/
 .cups/
+.darcs/
 .dropbox/
 .dvdcss/
 .eclipse_keyring
