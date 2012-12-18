@@ -15,7 +15,7 @@ if [ -e ~/bin/jing.jar ]; then
 fi
 alias qm="mvn -DskipTests -DskipITs -Dmaven.test.skip"
 alias qmd="mvnDebug -DskipTests -DskipITs -Dmaven.test.skip"
-alias pupcp="cp -r trunk/* branches/production/ && cp -r trunk/* branches/testing/"
+alias pupcp="rm -rf branches/testing branches/production && cp -r trunk branches/testing && cp -r trunk branches/production"
 
 #alias ga="git add"
 #alias gst="git status"
