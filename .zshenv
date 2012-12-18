@@ -1,6 +1,6 @@
 . /Users/georgeb/.zprezto/runcoms/zshenv
 
-export PATH=$HOME/src/go/bin:$HOME/.rbenv/bin:$PATH
+export PATH=/usr/local/share/npm/bin:$HOME/src/go/bin:$HOME/.rbenv/bin:$PATH
 export EDITOR=vim
 export PAGER=vimpager
 
