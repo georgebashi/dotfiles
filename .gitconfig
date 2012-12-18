@@ -11,6 +11,7 @@
 [diff]
   mnemonicprefix = true
   renames = copy
+	tool = vimdiff
 [pack]
   threads = 0
 [rerere]
@@ -22,7 +23,7 @@
   pushInsteadOf = "https://github.com/"
 [merge]
   log = true
-  tool = vimdiff
+	tool = vimdiff
 [alias]
   lol = log --graph --decorate --oneline
   lola = log --graph --decorate --oneline --all
