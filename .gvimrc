@@ -1,4 +1,4 @@
-set guifont=Source_Code_Pro:h11
+set guifont=DejaVu_Sans_Mono:h12
 set guioptions=aegmt
 set fuoptions=maxhorz,maxvert
 set visualbell
