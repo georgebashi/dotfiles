@@ -12,3 +12,11 @@ alias pupcp="rm -rf branches/testing branches/production && cp -r trunk branches
 alias ffs="sudo"
 
 p() { HASTE_SERVER=http://pasti.co haste "$*" | pbcopy; }
+
+# props to @matthewfranglen, the mad bastard
+function vim-ctrlp () {
+  BUFFER='vim +:CtrlP'
+  zle accept-line
+}
+zle -N                vim-ctrlp
+bindkey -M viins '^P' vim-ctrlp
