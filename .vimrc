@@ -95,6 +95,8 @@ set number
 set ruler
 " always show status bar
 set laststatus=2
+" hide -- INSERT --, we have airline
+set noshowmode
 " make backspace do what you expect
 set backspace=indent,eol,start
 " use abbreviations in messages
@@ -254,6 +256,15 @@ augroup FTMisc
   autocmd BufReadCmd *.jar call zip#Browse(expand("<amatch>"))
 augroup END
 
+" exit insert mode quickly
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
 "}}}
 
 
