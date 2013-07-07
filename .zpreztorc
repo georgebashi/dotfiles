@@ -21,6 +21,8 @@ zstyle ':prezto:load' pmodule \
   'prompt'
 
 zstyle ':prezto:module:editor' keymap 'vi'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:gnu-utility' prefix 'g'
 zstyle ':prezto:module:editor:info:keymap:primary' format '>>>'
 zstyle ':prezto:module:editor:info:keymap:alternate' format '<<<'
 zstyle ':prezto:module:editor:info:completing' format '...'
