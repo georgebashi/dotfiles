@@ -2,58 +2,67 @@
 "{{{ setup
 " be vim
 set nocompatible
-" load vundle
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" load neobundle
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+  \     'windows' : 'make -f make_mingw32.mak',
+  \     'cygwin' : 'make -f make_cygwin.mak',
+  \     'mac' : 'make -f make_mac.mak',
+  \     'unix' : 'make -f make_unix.mak',
+  \    },
+  \ }
 "}}}
 
 "{{{ bundles
-" vundle plugin manager
-Bundle 'gmarik/vundle'
-" solarized theme
-Bundle 'altercation/vim-colors-solarized'
 " syntax checking
-Bundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 " misc handy mappings
-Bundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-unimpaired'
 " commenting
-Bundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdcommenter'
 " project tree
-Bundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
 " git
-Bundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-fugitive'
 " vertically align
-Bundle 'godlygeek/tabular'
+NeoBundle 'godlygeek/tabular'
 " change "surrounds"
-Bundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-surround'
 " markdown
-Bundle 'tpope/vim-markdown'
-" buffer tabs
-" haskellmode
-Bundle 'kevinstreit/VIM-Haskell'
+NeoBundle 'tpope/vim-markdown'
 
-Bundle 'cucumber.zip'
-Bundle 'chaquotay/ftl-vim-syntax'
-Bundle 'dmreiland/vim-puppet'
-Bundle 'mattn/gist-vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'skammer/vim-css-color'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'groenewege/vim-less'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'kien/ctrlp.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'ervandew/supertab'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "georgebashi/snipmate-snippets"
-Bundle "garbas/vim-snipmate"
-Bundle "jnwhiteh/vim-golang"
-Bundle "nsf/gocode", {'rtp': 'vim/'}
+NeoBundle 'cucumber.zip'
+NeoBundle 'chaquotay/ftl-vim-syntax'
+NeoBundle 'dmreiland/vim-puppet'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'ap/vim-css-color'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'michaeljsmith/vim-indent-object'
+NeoBundle 'ervandew/supertab'
+NeoBundle "MarcWeber/vim-addon-mw-utils"
+NeoBundle "tomtom/tlib_vim"
+NeoBundle "georgebashi/snipmate-snippets"
+NeoBundle "garbas/vim-snipmate"
+NeoBundle "jnwhiteh/vim-golang"
+NeoBundle "nsf/gocode", {'rtp': 'vim/'}
+NeoBundle "hukl/Smyck-Color-Scheme", {'script_type' : 'colors'}
 "}}}
+
+" detect file type and load plugins & indent rules
+filetype plugin indent on
+NeoBundleCheck
 
 
 "{{{ ctrlp
@@ -130,8 +139,6 @@ set foldtext=MyFoldText()
 "set expandtab
 " highlight tabs & trailing spaces
 set list listchars=tab:\ \ ,trail:·
-" detect file type and load plugins & indent rules
-filetype plugin indent on
 " syntax-aware folds
 set foldmethod=syntax
 " autoindent by default
@@ -148,11 +155,8 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 
 "{{{ syntax
 syntax on
-set t_Co=256
 set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
-call togglebg#map("<F5>")
+colorscheme smyck
 "}}}
 
 "{{{ search
@@ -169,40 +173,27 @@ set gdefault
 "}}}
 
 "{{{ filetypes
-" gradle = groovy
+" add some filetypes
 au BufNewFile,BufRead *.gradle setf groovy
-" json = js
 au BufNewFile,BufRead *.json set ft=javascript
 au BufNewFile,BufRead *.t set ft=sh
-" add some ruby types
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
 au BufRead,BufNewFile *.less set ft=css
-" .mg/config is a gitconfig file
 au BufRead,BufNewFile *.mg/config set ft=gitconfig
-" use 2 spaces in xml
+au BufNewFile,BufRead *.ftl set ft=html.ftl
+
+" configure filetypes
 au FileType xml set expandtab sw=2 sts=2
-" use 4 spaces in java
+au FileType yaml set expandtab sw=2 sts=2
 au FileType java set expandtab sw=4 sts=4
-" use tabs in makefiles
-au FileType make set noexpandtab
-" allow modelines
-set modeline
-" search for modelines in first and last 10 lines
-set modelines=10
+au FileType make set noet
+au FileType puppet set et sw=4 sts=4
+au FileType ruby set et sw=2 sts=2
 "}}}
 
 "{{{ mappings
-" use kj as a quicker <Esc>
-inoremap kj <Esc>
-" use ; as a quicker :
-map ; :
-" move ; to ;;
-noremap ;; ;
 " press F2 before a paste to turn off autoindent
 set pastetoggle=<F2>
-" create blank line without entering insert
-nnoremap <silent> zj o<Esc>
-nnoremap <silent> zk O<Esc>
 " w!! to save with sudo
 cmap w!! %!sudo tee > /dev/null %
 " use space to pagedown
@@ -216,6 +207,8 @@ vnoremap > >gv
 "{{{ misc vim settings
 set autowrite
 set virtualedit=block
+set modeline
+set modelines=10
 "}}}
 
 "{{{ misc plugin settings
@@ -227,14 +220,8 @@ let NERDChristmasTree=1
 let NERDTreeMinimalUI=1
 map <Leader>n :NERDTreeToggle<CR>
 let g:gist_private = 1
-let g:Powerline_symbols = 'compatible'
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
-let g:indent_guides_space_guides = 1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#073642 ctermbg=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#073642 ctermbg=0
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 "}}}
 
@@ -269,8 +256,6 @@ augroup END
 
 "}}}
 
-au BufNewFile,BufRead *.ftl set ft=html.ftl
-au FileType puppet set et sw=4 sts=4
 
 " autocomplete stuff {{{
 let g:SuperTabDefaultCompletionType = "context"
