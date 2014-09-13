@@ -1,80 +1,44 @@
+" vim: set et sw=2 sts=2 ai:
+set nocompatible "| filetype indent plugin on | syn on
+set runtimepath+=~/.vim/bundle/neobundle.vim/
 
-"{{{ setup
-" be vim
-set nocompatible
-" load neobundle
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
-call neobundle#rc(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \     'windows' : 'make -f make_mingw32.mak',
-  \     'cygwin' : 'make -f make_cygwin.mak',
-  \     'mac' : 'make -f make_mac.mak',
-  \     'unix' : 'make -f make_unix.mak',
-  \    },
-  \ }
-"}}}
-
-"{{{ bundles
-" syntax checking
-NeoBundle 'scrooloose/syntastic'
-" misc handy mappings
-NeoBundle 'tpope/vim-unimpaired'
-" commenting
-NeoBundle 'scrooloose/nerdcommenter'
-" project tree
-NeoBundle 'scrooloose/nerdtree'
-" git
+NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-fugitive'
-" vertically align
-NeoBundle 'godlygeek/tabular'
-" change "surrounds"
-NeoBundle 'tpope/vim-surround'
-" markdown
-NeoBundle 'tpope/vim-markdown'
-
-NeoBundle 'cucumber.zip'
-NeoBundle 'chaquotay/ftl-vim-syntax'
-NeoBundle 'dmreiland/vim-puppet'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'ap/vim-css-color'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'groenewege/vim-less'
+NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'michaeljsmith/vim-indent-object'
-NeoBundle 'ervandew/supertab'
-NeoBundle "MarcWeber/vim-addon-mw-utils"
-NeoBundle "tomtom/tlib_vim"
-NeoBundle "georgebashi/snipmate-snippets"
-NeoBundle "garbas/vim-snipmate"
-NeoBundle "jnwhiteh/vim-golang"
-NeoBundle "nsf/gocode", {'rtp': 'vim/'}
-NeoBundle "hukl/Smyck-Color-Scheme", {'script_type' : 'colors'}
-"}}}
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-bundler'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'sjl/vitality.vim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimproc', { 'build' : { 'mac' : 'make -f make_mac.mak', }, }
+NeoBundle 'AndrewRadev/splitjoin.vim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'leafo/moonscript-vim'
+NeoBundle 'lepture/vim-jinja'
+NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
+NeoBundle 'vim-scripts/dbext.vim'
+NeoBundle 'PeterRincker/vim-argumentative'
 
-" detect file type and load plugins & indent rules
+NeoBundle 'chriskempson/base16-vim'
+
+call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
 
-
-"{{{ ctrlp
-let g:ctrlp_working_path_mode = 2
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
-let g:ctrlp_by_filename = 1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_mruf_case_sensitive = 0
-"}}}
+set background=dark
+let base16colorspace=256
+colorscheme base16-railscasts
+" colorscheme Tomorrow-Night
 
 "{{{ paths
 " put backups out of the way
@@ -155,12 +119,6 @@ set wildmode=list:longest,full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 "}}}
 
-"{{{ syntax
-syntax on
-set background=dark
-colorscheme smyck
-"}}}
-
 "{{{ search
 " highlight last search term
 set hlsearch
@@ -193,6 +151,21 @@ au FileType puppet set et sw=4 sts=4
 au FileType ruby set et sw=2 sts=2
 "}}}
 
+au FocusLost * silent! wa
+
+" all folds open by default
+autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
+
+let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+let NERDChristmasTree=1
+let NERDTreeMinimalUI=1
+map <Leader>n :NERDTreeToggle<CR>
+let g:gist_private = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='simple'
+
+
 "{{{ mappings
 " press F2 before a paste to turn off autoindent
 set pastetoggle=<F2>
@@ -201,83 +174,19 @@ cmap w!! %!sudo tee > /dev/null %
 " use space to pagedown
 noremap <Space> <PageDown>
 " switch windows with ,
-nmap , <C-w><C-w>
+" nmap <silent> <Up> :wincmd k<CR>
+" nmap <silent> <Down> :wincmd j<CR>
+" nmap <silent> <Left> :wincmd h<CR>
+" nmap <silent> <Right> :wincmd l<CR>
 vnoremap < <gv
 vnoremap > >gv
 "}}}
 
-"{{{ misc vim settings
-set autowrite
-set virtualedit=block
-set modeline
-set modelines=10
-"}}}
+let g:unite_enable_start_insert = 1
+let g:unite_source_rec_min_cache_files = 0
+let g:unite_source_rec_max_cache_files = 0
+nnoremap <C-P> :Unite -no-split file_rec/git:--others:--exclude-standard:--cached<CR>
+nnoremap <C-G> :Unite -no-split grep:.:-iR<CR>
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
-"{{{ misc plugin settings
-" my name for snippets
-let g:snips_author = 'George Bashi'
-"autocmd vimenter * NERDTree | winc l
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-let NERDChristmasTree=1
-let NERDTreeMinimalUI=1
-map <Leader>n :NERDTreeToggle<CR>
-let g:gist_private = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
-"}}}
-
-"{{{ clever bits
-" remember last file location
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-        \| exe "normal g'\"" | endif
-endif
-
-" all folds open by default
-autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
-
-augroup FTMisc
-  " save when losing focus, update fugitive status when gaining
-  autocmd FocusLost   * silent! wall
-  autocmd FocusGained * silent! call fugitive#reload_status()
-
-  " chmod +x new files on save if they start with hashbang
-  autocmd BufNewFile  * let b:chmod_exe=1
-  autocmd BufWritePre * if exists("b:chmod_exe") |
-        \ unlet b:chmod_exe |
-        \ if getline(1) =~ '^#!' | let b:chmod_new="+x" | endif |
-      \ endif
-  autocmd BufWritePost,FileWritePost * if exists("b:chmod_new")|
-        \ silent! execute "!chmod ".b:chmod_new." <afile>"|
-        \ unlet b:chmod_new|
-        \ endif
-  " allow browsing inside jars
-  autocmd BufReadCmd *.jar call zip#Browse(expand("<amatch>"))
-augroup END
-
-" exit insert mode quickly
-if ! has('gui_running')
-    set ttimeoutlen=10
-    augroup FastEscape
-        autocmd!
-        au InsertEnter * set timeoutlen=0
-        au InsertLeave * set timeoutlen=1000
-    augroup END
-endif
-"}}}
-
-
-" autocomplete stuff {{{
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
-let g:SuperTabClosePreviewOnPopupClose = 1
-" }}}
-
-" eclim {{{
-let g:EclimJavaImportExclude = [ "^com\.sun\..*", "^sun\..*", "^sunw\..*" ]
-let g:EclimJavaImportPackageSeparationLevel = 0
-"}}}
-
-" vim: set foldmethod=marker:
