@@ -1,6 +1,6 @@
 [user]
   name = George Bashi
-  email = george.bashi@semantico.com
+	email = george@bashi.co.uk
 [color]
   ui = auto
 [core]
@@ -34,3 +34,5 @@
 	default = upstream
 [url "git@gitlab.semantico.net:"]
 	insteadof = s:
+[github]
+	user = georgebashi
