@@ -1,1 +1,1 @@
-. /Users/georgeb/.zprezto/runcoms/zprofile
+. $HOME/.zprezto/runcoms/zprofile

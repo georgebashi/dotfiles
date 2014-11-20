@@ -1,1 +1,1 @@
-. /Users/georgeb/.zprezto/runcoms/zlogin
+. $HOME/.zprezto/runcoms/zlogin

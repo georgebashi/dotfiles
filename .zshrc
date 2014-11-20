@@ -1,4 +1,4 @@
-. /Users/georgeb/.zprezto/runcoms/zshrc
+. $HOME/.zprezto/runcoms/zshrc
 
 alias less=$PAGER
 alias zless=$PAGER
