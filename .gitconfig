@@ -8,6 +8,7 @@
   fsyncobjectfiles = true
   preloadindex = true
   pager = less
+	editor = vim
 [diff]
   mnemonicprefix = true
   renames = copy
