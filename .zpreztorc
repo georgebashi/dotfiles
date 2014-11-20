@@ -1,3 +1,4 @@
+# vim: set ft=zsh:
 
 zstyle ':prezto:*:*' case-sensitive 'no'
 zstyle ':prezto:*:*' color 'yes'
@@ -9,13 +10,13 @@ zstyle ':prezto:load' pmodule \
   'history' \
   'directory' \
   'spectrum' \
+  'gnu-utility' \
   'utility' \
   'completion' \
   'git' \
   'ruby' \
-  'tmux' \
-  'haskell' \
   'osx' \
+  'tmux' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt'

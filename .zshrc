@@ -1,22 +1,87 @@
 . $HOME/.zprezto/runcoms/zshrc
 
+# vim: set ft=zsh et ai sw=2 sts=2:
+
+. $HOME/.base16-railscasts.dark.sh
+
 alias less=$PAGER
 alias zless=$PAGER
 unsetopt share_history
 setopt inc_append_history
 
-alias qm="mvn -DskipTests -DskipITs -Dmaven.test.skip"
-alias qmd="mvnDebug -DskipTests -DskipITs -Dmaven.test.skip"
-alias pupcp="rm -rf branches/testing branches/production && cp -r trunk branches/testing && cp -r trunk branches/production"
-
-alias ffs="sudo"
-
-p() { HASTE_SERVER=http://pasti.co haste "$*" | pbcopy; }
-
 # props to @matthewfranglen, the mad bastard
 function vim-ctrlp () {
-  BUFFER='vim +:CtrlP'
+  BUFFER="vim '+:Unite -no-split file_rec/git:--others:--exclude-standard:--cached'"
   zle accept-line
 }
-zle -N                vim-ctrlp
-bindkey -M viins '^P' vim-ctrlp
+zle -N vim-ctrlp
+bindkey '^P' vim-ctrlp
+
+function fg-or-run-vim () {
+  if [[ $#jobstates -eq 0 ]]; then
+    BUFFER='vim'
+    zle accept-line
+  else
+    BUFFER='fg'
+    zle accept-line
+  fi
+}
+zle -N fg-or-run-vim
+bindkey '^Z' fg-or-run-vim
+
+function tab_color() {
+  echo -ne "\033]6;1;bg;red;brightness;$1\a"
+  echo -ne "\033]6;1;bg;green;brightness;$2\a"
+  echo -ne "\033]6;1;bg;blue;brightness;$3\a"
+}
+
+function reset_tab_color() {
+  echo -ne "\033]6;1;bg;*;default\a"
+}
+
+function set_tab_color_for_cmd() {
+  case "$1" in
+    vim*|vi\ *)
+      tab_color 0 127 0
+      ;;
+    ssh*)
+      tab_color 245 190 25
+      ;;
+    rails\ *)
+      tab_color 152 26 33
+      ;;
+    foreman\ *)
+      tab_color 153 153 153
+      ;;
+    bundle*)
+      tab_color 198 231 236
+      ;;
+    mongod*)
+      tab_color 64 40 23
+      ;;
+    vagrant*)
+      tab_color 72 180 251
+      ;;
+  esac
+}
+
+add-zsh-hook precmd reset_tab_color
+add-zsh-hook preexec set_tab_color_for_cmd
+
+function tail_syslog_of() {
+  sshhost=lemur.z0o.us
+  loghost=$1
+  if [ "$loghost" = "qa" ]; then
+    sshhost=london.scholarific.us
+    loghost=$2
+  fi
+  ssh "$sshhost" "sudo tail -f /mnt/datastore/log/remote/$loghost/$(date +%Y/%m-%d).log | awk -W interactive '{ print substr(\$2,index(\$2,\"T\")+1,8), substr(\$0,index(\$0,\$4)) }'"
+}
+
+function sc() {
+  ssh -t abalone.z0o.us 'cd current && bundle exec rails console production'
+}
+
+alias vi="nvim"
+alias vim="nvim"
+alias ffs="sudo"

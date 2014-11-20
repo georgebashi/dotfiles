@@ -118,5 +118,6 @@
 .yjp/
 .zcompdump*
 .zhistory
+.zsecrets
 .zsh-update
 .zsh_history
