@@ -1,44 +1,36 @@
 " vim: set et sw=2 sts=2 ai:
-set nocompatible "| filetype indent plugin on | syn on
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+set nocompatible
+
+call plug#begin('~/.vim/plugged')
+Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-ruby/vim-ruby'
+Plug 'bling/vim-airline'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/syntastic'
+Plug 'Shougo/vimproc', { 'do' : 'make -f make_mac.mak' }
+Plug 'Shougo/unite.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'leafo/moonscript-vim'
+Plug 'lepture/vim-jinja'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+Plug 'vim-scripts/dbext.vim'
+Plug 'PeterRincker/vim-argumentative'
+call plug#end()
 
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
-
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'tpope/vim-sensible'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tpope/vim-bundler'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'sjl/vitality.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc', { 'build' : { 'mac' : 'make -f make_mac.mak', }, }
-NeoBundle 'AndrewRadev/splitjoin.vim'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'leafo/moonscript-vim'
-NeoBundle 'lepture/vim-jinja'
-NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-NeoBundle 'vim-scripts/dbext.vim'
-NeoBundle 'PeterRincker/vim-argumentative'
-
-NeoBundle 'chriskempson/base16-vim'
-
-call neobundle#end()
-filetype plugin indent on
-NeoBundleCheck
 
 set background=dark
 let base16colorspace=256
 colorscheme base16-railscasts
-" colorscheme Tomorrow-Night
 
 "{{{ paths
 " put backups out of the way
