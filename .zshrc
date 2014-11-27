@@ -85,3 +85,5 @@ function sc() {
 alias vi="nvim"
 alias vim="nvim"
 alias ffs="sudo"
+
+chruby ruby-2.0.0-p481
