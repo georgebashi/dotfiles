@@ -95,6 +95,7 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'leafo/moonscript-vim', { 'for': 'moon' }
 Plug 'lepture/vim-jinja', { 'for': 'jinja' }
 Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 call plug#end()
 
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
