@@ -1,6 +1,8 @@
 " vim: set et sw=2 sts=2 ai:
 set nocompatible
 
+set shell=$SHELL
+
 " clear all autocommands
 autocmd!
 
