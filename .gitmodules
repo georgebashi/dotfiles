@@ -2,3 +2,7 @@
 	path = .zim
 	url = https://github.com/Eriner/zim.git
 	branch = master
+[submodule ".bash_it"]
+	path = .bash_it
+	url = https://github.com/Bash-it/bash-it.git
+	branch = master
