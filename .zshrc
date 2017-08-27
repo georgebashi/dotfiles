@@ -1,9 +1,7 @@
-. $HOME/.zprezto/runcoms/zshrc
+[[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]] && source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 
 # vim: set ft=zsh et ai sw=2 sts=2:
-
-. $HOME/.base16-railscasts.dark.sh
-
+export PAGER=vim
 alias less=$PAGER
 alias zless=$PAGER
 unsetopt share_history
@@ -68,22 +66,8 @@ function set_tab_color_for_cmd() {
 add-zsh-hook precmd reset_tab_color
 add-zsh-hook preexec set_tab_color_for_cmd
 
-function tail_syslog_of() {
-  sshhost=lemur.z0o.us
-  loghost=$1
-  if [ "$loghost" = "qa" ]; then
-    sshhost=london.scholarific.us
-    loghost=$2
-  fi
-  ssh "$sshhost" "sudo tail -f /mnt/datastore/log/remote/$loghost/$(date +%Y/%m-%d).log | awk -W interactive '{ print substr(\$2,index(\$2,\"T\")+1,8), substr(\$0,index(\$0,\$4)) }'"
-}
-
-function sc() {
-  ssh -t abalone.z0o.us 'cd current && bundle exec rails console production'
-}
-
 alias vi="nvim"
 alias vim="nvim"
 alias ffs="sudo"
 
-chruby ruby-2.0.0-p481
+alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

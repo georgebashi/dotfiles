@@ -1,1 +1,0 @@
-text/html; html2text --ignore-images -b 72 %s; copiousoutput;

@@ -33,7 +33,5 @@
   opt = repack -a -d -f --depth=250 --window=250
 [push]
 	default = upstream
-[url "git@gitlab.semantico.net:"]
-	insteadof = s:
 [github]
 	user = georgebashi

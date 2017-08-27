@@ -1,1 +1,0 @@
-. $HOME/.zprezto/runcoms/zprofile
