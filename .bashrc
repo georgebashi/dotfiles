@@ -9,3 +9,5 @@ export SHORT_HOSTNAME=$(hostname -s)
 export SHORT_TERM_LINE=true
 
 source "$BASH_IT"/bash_it.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

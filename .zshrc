@@ -1,5 +1,8 @@
 [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]] && source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 
+export PATH=/usr/local/bin:$PATH:$HOME/esp/xtensa-esp32-elf/bin
+export IDF_PATH=$HOME/esp/esp-idf
+
 # vim: set ft=zsh et ai sw=2 sts=2:
 export PAGER=vim
 alias less=$PAGER
@@ -71,3 +74,5 @@ alias vim="nvim"
 alias ffs="sudo"
 
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
