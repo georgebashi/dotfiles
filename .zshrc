@@ -1,78 +1,109 @@
-[[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]] && source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
+# set up zplugin
+local -A ZPLGM
+ZPLGM[HOME_DIR]="${ZDOTDIR:-$HOME}/.zplugin"
+source "${ZPLGM[HOME_DIR]}/bin/zplugin.zsh"
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-export PATH=/usr/local/bin:$PATH:$HOME/esp/xtensa-esp32-elf/bin
-export IDF_PATH=$HOME/esp/esp-idf
+# prezto base
+zplugin snippet PZT::modules/environment/init.zsh
 
-# vim: set ft=zsh et ai sw=2 sts=2:
-export PAGER=vim
-alias less=$PAGER
-alias zless=$PAGER
-unsetopt share_history
-setopt inc_append_history
+zstyle ':prezto:module:terminal' auto-title 'yes'
+zplugin snippet PZT::modules/terminal/init.zsh
 
-# props to @matthewfranglen, the mad bastard
-function vim-ctrlp () {
-  BUFFER="vim '+:Unite -no-split file_rec/git:--others:--exclude-standard:--cached'"
-  zle accept-line
-}
-zle -N vim-ctrlp
-bindkey '^P' vim-ctrlp
+zstyle ':prezto:module:editor' key-bindings 'vi'
+zplugin snippet PZT::modules/editor/init.zsh
 
-function fg-or-run-vim () {
-  if [[ $#jobstates -eq 0 ]]; then
-    BUFFER='vim'
-    zle accept-line
-  else
-    BUFFER='fg'
-    zle accept-line
+zplugin snippet PZT::modules/history/init.zsh
+
+zplugin snippet PZT::modules/directory/init.zsh
+
+zstyle ':prezto:module:utility:ls' color 'yes'
+zplugin snippet PZT::modules/utility/init.zsh
+
+# git
+zplugin ice wait"0" lucid
+zplugin snippet PZT::modules/git/alias.zsh
+zplugin ice wait"0" lucid
+zplugin snippet PZT::modules/git/init.zsh
+
+# completions
+if [[ -d /usr/local/Homebrew/completions/zsh ]]; then
+  zplugin ice wait"1" lucid
+  zplugin light /usr/local/Homebrew/completions/zsh
+fi
+zplugin ice wait"0" lucid
+zplugin light zsh-users/zsh-completions
+
+# fzf
+if (( $+commands[fzf] )); then
+  zplugin ice wait"0" lucid src"shell/key-bindings.zsh" pick"shell/completion.zsh"
+  zplugin light junegunn/fzf
+  if (( $+commands[fd] )); then
+    export FZF_DEFAULT_COMMAND="fd . ."
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd -t d . ."
   fi
-}
-zle -N fg-or-run-vim
-bindkey '^Z' fg-or-run-vim
+  #bindkey '\eOA' fzf-history-widget
+  #bindkey '\eOB' fzf-history-widget
+fi
 
-function tab_color() {
-  echo -ne "\033]6;1;bg;red;brightness;$1\a"
-  echo -ne "\033]6;1;bg;green;brightness;$2\a"
-  echo -ne "\033]6;1;bg;blue;brightness;$3\a"
-}
+# iterm
+if [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
+  zplugin snippet OMZ::plugins/iterm2/iterm2.plugin.zsh
+  zplugin snippet https://iterm2.com/shell_integration/zsh
+  export GEOMETRY_PROMPT_PREFIX="%{$(iterm2_prompt_mark)%}"
+else
+  export GEOMETRY_PROMPT_PREFIX=""
+fi
 
-function reset_tab_color() {
-  echo -ne "\033]6;1;bg;*;default\a"
-}
+# ruby
+if (( $+commands[rbenv] )); then
+  zplugin snippet PZT::modules/ruby/init.zsh
+fi
 
-function set_tab_color_for_cmd() {
-  case "$1" in
-    vim*|vi\ *)
-      tab_color 0 127 0
-      ;;
-    ssh*)
-      tab_color 245 190 25
-      ;;
-    rails\ *)
-      tab_color 152 26 33
-      ;;
-    foreman\ *)
-      tab_color 153 153 153
-      ;;
-    bundle*)
-      tab_color 198 231 236
-      ;;
-    mongod*)
-      tab_color 64 40 23
-      ;;
-    vagrant*)
-      tab_color 72 180 251
-      ;;
-  esac
-}
+# syntax highlighting
+zplugin ice wait"0" lucid atinit"zpcompinit; zpcdreplay"
+zplugin light zdharma/fast-syntax-highlighting
 
-add-zsh-hook precmd reset_tab_color
-add-zsh-hook preexec set_tab_color_for_cmd
+# prompt
+export PROMPT_GEOMETRY_COLORIZE_SYMBOL=true
+export PROMPT_GEOMETRY_COLORIZE_ROOT=true
+export PROMPT_GEOMETRY_EXEC_TIME=true
+export PROMPT_GEOMETRY_GIT_TIME=false
+export GEOMETRY_PLUGIN_HOSTNAME_PREFIX=" "
+export GEOMETRY_GIT_SEPARATOR="·"
+export GEOMETRY_PROMPT_PLUGINS_PRIMARY=(path hostname)
+export GEOMETRY_PROMPT_PLUGINS_SECONDARY=(exec_time git jobs virtualenv)
 
-alias vi="nvim"
-alias vim="nvim"
-alias ffs="sudo"
+export GEOMETRY_SYMBOL_PROMPT="❯"
+export GEOMETRY_SYMBOL_ROOT="❯"
 
+export GEOMETRY_PROMPT_PREFIX_SPACER=""
+zplugin light geometry-zsh/geometry
+
+# vimpager
+if (( $+commands[vimpager] )); then
+  export PAGER=vimpager
+  alias less=$PAGER
+  alias zless=$PAGER
+fi
+
+# neovim
+if (( $+commands[nvim] )); then
+  export EDITOR=nvim
+  export VISUAL=nvim
+  alias vi=$EDITOR
+  alias vim=$EDITOR
+fi
+
+# secrets
+[[ -f $HOME/.zsecrets ]] && . $HOME/.zsecrets
+
+# sbin in path
+[[ -d /usr/local/sbin ]] && export PATH=/usr/local/sbin:$PATH
+
+# config alias
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+:

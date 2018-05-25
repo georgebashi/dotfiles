@@ -1,43 +1,37 @@
 " vim: set et sw=2 sts=2 ai:
+scriptencoding utf-8
 
 set shell=$SHELL
 
-" clear all autocommands
-autocmd!
-
 call plug#begin()
-Plug 'benekastah/neomake'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'tpope/vim-sensible'
+Plug 'w0rp/ale'
 
-" editing
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'PeterRincker/vim-argumentative'
-Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
+
 Plug 'godlygeek/tabular'
 Plug 'luochen1990/rainbow'
 
-" tools
-Plug 'vim-scripts/dbext.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'tpope/vim-vinegar'
+Plug 'junegunn/fzf'
 
-" ui
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'unblevable/quick-scope'
-Plug 'dracula/vim'
 
-" languages
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-Plug 'leafo/moonscript-vim', { 'for': 'moon' }
-Plug 'lepture/vim-jinja', { 'for': 'jinja' }
-Plug 'markcornick/vim-terraform'
-Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
+Plug 'markcornick/vim-terraform', { 'for': 'terraform' }
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 call plug#end()
 
 set mouse=
@@ -97,66 +91,63 @@ set gdefault
 colorscheme dracula
 
 function! MyFoldText() " {{{
-  let line = getline(v:foldstart)
+  let l:line = getline(v:foldstart)
 
-  let nucolwidth = &fdc + &number * &numberwidth
-  let windowwidth = winwidth(0) - nucolwidth - 3
-  let foldedlinecount = v:foldend - v:foldstart
+  let l:nucolwidth = &foldcolumn + &number * &numberwidth
+  let l:windowwidth = winwidth(0) - l:nucolwidth - 3
+  let l:foldedlinecount = v:foldend - v:foldstart
 
   " expand tabs into spaces
-  let onetab = strpart('          ', 0, &tabstop)
-  let line = substitute(line, '\t', onetab, 'g')
+  let l:onetab = strpart('          ', 0, &tabstop)
+  let l:line = substitute(l:line, '\t', l:onetab, 'g')
 
-  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+  let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
+  let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
+  return l:line . '…' . repeat(' ',l:fillcharcount) . l:foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
 
 
-"{{{ filetypes
-" add some filetypes
-au BufNewFile,BufRead *.gradle setf groovy
-au BufNewFile,BufRead *.json set ft=javascript
-au BufNewFile,BufRead *.t set ft=sh
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
-au BufRead,BufNewFile *.less set ft=css
-au BufRead,BufNewFile *.mg/config set ft=gitconfig
-au BufNewFile,BufRead *.ftl set ft=html.ftl
-au BufNewFile,BufRead *.json set ft=json
+augroup vimrc
+  autocmd!
 
-" configure filetypes
-au FileType xml set expandtab sw=2 sts=2
-au FileType yaml set expandtab sw=2 sts=2
-au FileType java set expandtab sw=4 sts=4
-au FileType make set noet
-au FileType ruby set et sw=2 sts=2
-au FileType coffee set et sw=2 sts=2
-au FileType terraform set et sw=4 sts=4
-au FileType json set et sw=4 sts=4
-au Filetype php set sts=4 sw=4 ai expandtab
-au Filetype go set nolist
-au Filetype moon set sts=4 sw=4 ai et
+  "{{{ filetypes
+  " add some filetypes
+  autocmd BufNewFile,BufRead *.gradle setf groovy
+  autocmd BufNewFile,BufRead *.json set ft=javascript
+  autocmd BufNewFile,BufRead *.t set ft=sh
+  autocmd BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+  autocmd BufRead,BufNewFile *.less set ft=css
+  autocmd BufRead,BufNewFile *.mg/config set ft=gitconfig
+  autocmd BufNewFile,BufRead *.ftl set ft=html.ftl
+  autocmd BufNewFile,BufRead *.json set ft=json
 
-au! BufWritePost *.pp Neomake
-"}}}
+  " configure filetypes
+  autocmd FileType xml set expandtab sw=2 sts=2
+  autocmd FileType yaml set expandtab sw=2 sts=2
+  autocmd FileType java set expandtab sw=4 sts=4
+  autocmd FileType make set noet
+  autocmd FileType ruby set et sw=2 sts=2
+  autocmd FileType coffee set et sw=2 sts=2
+  autocmd FileType terraform set et sw=4 sts=4
+  autocmd FileType json set et sw=4 sts=4
+  autocmd Filetype php set sts=4 sw=4 ai expandtab
+  autocmd Filetype go set nolist
+  autocmd Filetype moon set sts=4 sw=4 ai et
 
-au FocusLost * silent! wall
+  autocmd! BufWritePost *.pp Neomake
+  "}}}
 
-" all folds open by default
-autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
+  autocmd FocusLost * silent! wall
 
-" restore previous line edited
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  " all folds open by default
+  autocmd BufEnter * let PreFoldPosition = getpos('.') | silent! %foldopen! | call setpos('.', PreFoldPosition)
 
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-let NERDChristmasTree=1
-let NERDTreeMinimalUI=1
-map <Leader>n :NERDTreeToggle<CR>
+  " restore previous line edited
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
+
 let g:gist_private = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_theme='simple'
 
 "{{{ mappings
 " press F2 before a paste to turn off autoindent
@@ -172,13 +163,7 @@ vnoremap > >gv
 " pymode is fairly irritating
 let g:pymode_rope = 0
 let g:pymode_trim_whitespaces = 0
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-nnoremap <C-P> :FZF!<CR>
+let g:pymode_python = 'python3'
 
 inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
@@ -189,16 +174,10 @@ nnoremap <Right> <NOP>
 nnoremap <Up>    <NOP>
 nnoremap <Down>  <NOP>
 
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-autocmd BufWinEnter,WinEnter term://* startinsert
-
 nnoremap <C-d> ZZ
 
-let g:rainbow_active = 0
+let g:rainbow_active = 1
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:lightline = {
+      \ 'colorscheme': 'Dracula',
+      \ }
