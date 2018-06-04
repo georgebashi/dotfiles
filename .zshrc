@@ -97,6 +97,10 @@ if (( $+commands[nvim] )); then
   alias vim=$EDITOR
 fi
 
+# diff-so-fancy
+zplugin ice as"program" pick"bin/git-dsf" wait"0" lucid
+zplugin light zdharma/zsh-diff-so-fancy
+
 # secrets
 [[ -f $HOME/.zsecrets ]] && . $HOME/.zsecrets
 
