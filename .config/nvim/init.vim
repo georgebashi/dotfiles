@@ -134,6 +134,7 @@ augroup vimrc
   autocmd Filetype php set sts=4 sw=4 ai expandtab
   autocmd Filetype go set nolist
   autocmd Filetype moon set sts=4 sw=4 ai et
+  autocmd Filetype cpp set sts=2 sw=2 ai et
 
   autocmd! BufWritePost *.pp Neomake
   "}}}
@@ -181,3 +182,10 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:lightline = {
       \ 'colorscheme': 'Dracula',
       \ }
+
+let g:ale_linters = {
+\   'cpp': ['clangcheck', 'clangtidy', 'clang-format', 'cppcheck', 'cpplint', 'flawfinder'],
+\}
+let g:ale_fixers = {
+\   'cpp': ['clang-format'],
+\}
