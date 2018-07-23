@@ -55,7 +55,10 @@ fi
 # iterm
 if [[ "$TERM_PROGRAM" = "iTerm.app" ]]; then
   zplugin snippet OMZ::plugins/iterm2/iterm2.plugin.zsh
-  zplugin snippet https://iterm2.com/shell_integration/zsh
+  zplugin ice pick"source/shell_integration/zsh"
+  zplugin light gnachman/iterm2-website
+  zplugin ice wait"0" lucid as"command" pick"source/utilities/*"
+  zplugin light gnachman/iterm2-website
   export GEOMETRY_PROMPT_PREFIX="%{$(iterm2_prompt_mark)%}"
 else
   export GEOMETRY_PROMPT_PREFIX=""
