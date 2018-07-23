@@ -1,37 +1,49 @@
 [user]
-  name = George Bashi
+	name = George Bashi
 	email = george@bashi.co.uk
 [color]
-  ui = auto
+	ui = true
 [core]
-  whitespace = tab-in-indent,tabwidth=4
-  fsyncobjectfiles = true
-  preloadindex = true
-  pager = less
+	whitespace = tab-in-indent,tabwidth=4
+	fsyncobjectfiles = true
+	preloadindex = true
+	pager = diff-so-fancy | less --tabs=4 -RFX
 	editor = vim
 [diff]
-  mnemonicprefix = true
-  renames = copy
+	mnemonicprefix = true
+	renames = copy
 	tool = vimdiff
 [pack]
-  threads = 0
+	threads = 0
 [rerere]
-  enabled = 1
+	enabled = 1
 [url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
-  pushInsteadOf = "https://github.com/"
+	insteadOf = "gh:"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+	pushInsteadOf = "https://github.com/"
 [merge]
-  log = true
+	log = true
 	tool = vimdiff
 [alias]
-  lol = log --graph --decorate --oneline
-  lola = log --graph --decorate --oneline --all
-  h = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
-  opt = repack -a -d -f --depth=250 --window=250
+	lol = log --graph --decorate --oneline
+	lola = log --graph --decorate --oneline --all
+	h = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+	opt = repack -a -d -f --depth=250 --window=250
 [push]
 	default = upstream
 [github]
 	user = georgebashi
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
