@@ -1,6 +1,10 @@
 # set up zplugin
 local -A ZPLGM
 ZPLGM[HOME_DIR]="${ZDOTDIR:-$HOME}/.zplugin"
+if [[ ! -d "${ZPLGM[HOME_DIR]}" ]]; then
+  mkdir -p "${ZPLGM[HOME_DIR]}"
+  git clone https://github.com/zdharma/zplugin.git "${ZPLGM[HOME_DIR]}/bin"
+fi
 source "${ZPLGM[HOME_DIR]}/bin/zplugin.zsh"
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
@@ -37,7 +41,7 @@ zplugin light zsh-users/zsh-completions
 
 # fzf
 if (( $+commands[fzf] )); then
-  zplugin ice wait"0" lucid src"shell/key-bindings.zsh" pick"shell/completion.zsh"
+  zplugin ice wait"0" lucid multisrc"shell/{key-bindings,completion}.zsh" pick""
   zplugin light junegunn/fzf
   if (( $+commands[fd] )); then
     export FZF_DEFAULT_COMMAND="fd . ."
@@ -63,7 +67,7 @@ if (( $+commands[rbenv] )); then
 fi
 
 # syntax highlighting
-zplugin ice wait"0" lucid atinit"zpcompinit; zpcdreplay"
+zplugin ice wait"0" lucid
 zplugin light zdharma/fast-syntax-highlighting
 
 # prompt
